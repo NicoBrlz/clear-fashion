@@ -75,6 +75,21 @@ todo2();
 // 2. Log the variable
 // 3. Log how many brands we have
 
+function todo3() {
+
+  const brd = [];
+  for(let i = 0; i < database.length; i++){
+    if(!brd.includes(database[i].brand)){
+      brd.push(database[i].brand)
+    }
+  }
+  console.log(brd);
+  console.log(brd.length);
+
+}
+
+todo3();
+
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
