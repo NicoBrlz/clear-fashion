@@ -21,6 +21,10 @@ const MY_FAVORITE_BRANDS = [
 
 console.table(MY_FAVORITE_BRANDS);
 console.log(MY_FAVORITE_BRANDS[0]);
+const database = require('./data');
+
+
+
 
 /**
  * 🌱
@@ -35,8 +39,14 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // I can find on these e-shops
 // 2. Log the variable
 
-const CHEAPEST_T_SHIRT = 'https://www.faguo-store.com/fr/vetements/7606-arcy-t-shirt-en-coton-recycle-kaki.html'
-console.log(CHEAPEST_T_SHIRT)
+function todo1(){
+
+  let cheapest = 'https://www.faguo-store.com/fr/vetements/7606-arcy-t-shirt-en-coton-recycle-kaki.html';
+  console.log(cheapest);
+
+}
+  
+
 
 /**
  * 👕
@@ -50,6 +60,15 @@ console.log(CHEAPEST_T_SHIRT)
 // 🎯 TODO 2: Number of products
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
+
+function todo2() {
+
+  const nbr = database.length;
+  console.log(nbr)
+
+}
+
+todo2();
 
 // 🎯 TODO 3: Brands name
 // 1. Create a variable and assign it the list of brands name only
