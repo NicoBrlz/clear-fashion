@@ -95,6 +95,15 @@ todo3();
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
 
+function todo4() {
+
+  const sorted_price = database.sort((a,b) => (a.price,b.price));
+  console.log(sorted_price);
+  return sorted_price;
+}
+
+todo4();
+
 // 🎯 TODO 5: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
