@@ -114,12 +114,23 @@ function todo5(){
   const sortedDateAscend = database.sort((a, b) => (Date.parse(b.released) - Date.parse(a.released)));
   console.log(sortedDateAscend);
   return sortedDateAscend;
-  
+
 }
 
 // 🎯 TODO 6: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
 // 2. Log the list
+
+function todo6(){
+  const filterPrice = [];
+  for(let i = 0; i < database.length; i++){
+      if(database[i].price >= 50 && database[i].price <= 100){
+          filterPrice.push(database[i]);
+      }
+  }
+  console.log(filterPrice);
+  return filterPrice;
+}
 
 // 🎯 TODO 7: Average price
 // 1. Determine the average price of the marketplace
