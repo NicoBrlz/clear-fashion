@@ -136,6 +136,17 @@ function todo6(){
 // 1. Determine the average price of the marketplace
 // 2. Log the average
 
+function todo7(database) {
+  let sum = 0;
+  for(let i = 0; i < database.length; i++){
+      sum+= database[i].price;
+  }
+  sum = sum/database.length;
+  console.log('[-] Average price is: ' + sum.toPrecision(4)+ '€.');
+  return sum;
+}
+todo7(database);
+
 /**
  * 🏎
  * We are almost done with the `marketplace` variable
