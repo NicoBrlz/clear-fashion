@@ -19,8 +19,8 @@ const MY_FAVORITE_BRANDS = [
   }
 ];
 
-console.table(MY_FAVORITE_BRANDS);
-console.log(MY_FAVORITE_BRANDS[0]);
+//console.table(MY_FAVORITE_BRANDS);
+//console.log(MY_FAVORITE_BRANDS[0]);
 const database = require('./data');
 
 
@@ -46,7 +46,7 @@ function todo1(){
 
 }
   
-
+//todo1();
 
 /**
  * 👕
@@ -68,7 +68,7 @@ function todo2() {
 
 }
 
-todo2();
+//todo2();
 
 // 🎯 TODO 3: Brands name
 // 1. Create a variable and assign it the list of brands name only
@@ -85,10 +85,11 @@ function todo3() {
   }
   console.log(brd);
   console.log(brd.length);
+  return brd;
 
 }
 
-todo3();
+//todo3();
 
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -102,7 +103,7 @@ function todo4() {
   return sorted_price;
 }
 
-todo4();
+//todo4();
 
 // 🎯 TODO 5: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
@@ -116,6 +117,8 @@ function todo5(){
   return sortedDateAscend;
 
 }
+
+//todo5();
 
 // 🎯 TODO 6: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
@@ -132,6 +135,8 @@ function todo6(){
   return filterPrice;
 }
 
+//todo6();
+
 // 🎯 TODO 7: Average price
 // 1. Determine the average price of the marketplace
 // 2. Log the average
@@ -145,7 +150,8 @@ function todo7(database) {
   console.log('[-] Average price is: ' + sum.toPrecision(4)+ '€.');
   return sum;
 }
-todo7(database);
+
+//todo7(database);
 
 /**
  * 🏎
@@ -170,9 +176,39 @@ todo7(database);
 // 2. Log the variable
 // 3. Log the number of products by brands
 
+function todo8() {
+
+  const brands_list=todo3();
+  let brands={};
+  let brands_nbr={};
+  for(let i = 0; i<brands_list.length; i++){
+    let nbr=0;
+    let l = "[";
+    for(let k = 0; k<database.length; k++){
+      if(database[k].brand==brands_list[i]){
+        if(l.length>1){
+          l+=", ";
+        }
+        l+='{';
+        l+=database[k].name;
+        l+='}';
+        nbr+=1
+      }
+      
+    }
+    l+=']';
+    brands[brands_list[i]]=l;
+    brands_nbr[brands_list[i]]=nbr;
+  }
+  console.log("Liste des produits par marque: \n", brands);
+  console.log("Nombre de produits par marque: \n",brands_nbr);
+}
+
+todo8();
 // 🎯 TODO 9: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
+
 
 // 🎯 TODO 10: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
