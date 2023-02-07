@@ -135,7 +135,7 @@ function todo6(){
   return filterPrice;
 }
 
-//todo6();
+todo6();
 
 // 🎯 TODO 7: Average price
 // 1. Determine the average price of the marketplace
