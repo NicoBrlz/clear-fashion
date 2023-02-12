@@ -4,16 +4,11 @@
 /*
 Description of the available api
 GET https://clear-fashion-api.vercel.app/
-
 Search for specific products
-
 This endpoint accepts the following optional query string parameters:
-
 - `page` - page of products to return
 - `size` - number of products to return
-
 GET https://clear-fashion-api.vercel.app/brands
-
 Search for available brands list
 */
 
@@ -127,6 +122,13 @@ const render = (products, pagination) => {
  */
 selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
+
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});
+
+selectPage.addEventListener('change', async (event) => {
+  const products = await fetchProducts(parseInt(event.target.value), currentPagination.pageSize);
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
