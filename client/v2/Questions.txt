@@ -1,0 +1,30 @@
+Pourquoi on peut chercher l'url : https://clear-fashion-api.vercel.app/?brand=dedicated
+et pas : https://clear-fashion-api.vercel.app/?released=2022-09-24
+
+je peux pas non plus le faire avec price   |   pas besoin
+
+filtrer directement dans les event listener  |   fait
+
+
+
+problème : rien ne se passe -> truc à régler au niveau du bouton?   |   réglé (on devait mettre 'click' au lieu de 'change')
+
+Erreur lorsqu'on essaye de sort et de mettre les recently released (marchent pareil):
+Uncaught (in promise) TypeError: Cannot destructure property 'currentPage' of 'pagination' as it is undefined.
+-> au niveau de renderPagination
+Problème avec Pagination -> pb dans meta?	 |	réglé (il fallait que notre argument de setCurrentProducts contienne aussi meta)
+
+
+sur la bonne voie pour buttonReleased mais l'array filtered.result reste vide	  |	A checker
+
+
+on peut pas cumuler les filtres/sort	|	A checker
+-> quand on utilise un sélecteur qui n'est pas en paramètre de fetchProducts, ça casse tout?
+
+number of products devient undefined quand on appuie sur un bouton	|	A checker
+
+compter les nbNew 	|	A faire
+
+p50, p90 et p95??		| 	A checker
+
+

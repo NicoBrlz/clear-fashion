@@ -48,10 +48,15 @@ reasonablePrice.insertAdjacentElement('afterend', button2);
 button2.style.marginLeft = "10px";
 const buttonPrice = document.querySelector('#price');
 
-
+// Indicators selectors
 const idNbNew = document.querySelector('#indicators div:nth-child(4) span:nth-child(2)');
 idNbNew.setAttribute('id', 'nbNew');
 const spanNbNew = document.querySelector('#nbNew');
+
+
+const idLast = document.querySelector('#indicators div:last-child span:nth-child(2)');
+idLast.setAttribute('id', 'last');
+const spanLast = document.querySelector('#last');
 
 
 /**
