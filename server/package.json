@@ -10,7 +10,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
-    "mongodb": "^4.13.0",
+    "mongodb": "^4.14.0",
     "node-fetch": "^2.6.8",
     "parse-domain": "^7.0.1",
     "require-all": "^3.0.0",

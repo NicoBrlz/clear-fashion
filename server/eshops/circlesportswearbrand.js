@@ -8,9 +8,9 @@ const cheerio = require('cheerio');
  */
 const parse = data => {
   const $ = cheerio.load(data);
-
   return $('.grid__item .card__content')
     .map((i, element) => {
+      const brand = 'circlesportswear'
       const name = $(element)
         .find('.card__heading')
         .text()
@@ -24,8 +24,15 @@ const parse = data => {
           .text()
           .replace('€', '')
       );
+      var currentdate = new Date(); 
+      const date = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
 
-      return {name, price};
+      return {brand, name, price, date};
     })
     .get();
 };

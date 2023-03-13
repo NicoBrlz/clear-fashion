@@ -11,18 +11,28 @@ const parse = data => {
 
   return $('.products-list__block')
     .map((i, element) => {
+      const brand = 'montlimart';
       const name = $(element)
         .find('.product-miniature__title .text-reset')
         .text()
         .trim()
         .replace(/\s/g, ' ');
+
+        
       const price = parseInt(
         $(element)
           .find('.product-miniature__pricing .price')
           .text()
       );
+      var currentdate = new Date(); 
+      const date = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
 
-      return {name, price};
+      return {brand, name, price, date};
     })
     .get();
 };
