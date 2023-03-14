@@ -1,2 +1,21 @@
+SCRAPING
+
+
 Doublons quand je scrape circlesportswear  	| 	A régler
+
+
+
+MONGODB
+
+Checker si l'id ObjectId(...) est utitlisable et sinon, le rendre utilisable	|	A checker
+
+Empecher les doublons quand on insère les données ({upsert: true} ne marche pas)	|	A régler
+
+Filtrer par 2weeks	|	A faire
+
+
+
+API
+
+Faire marcher le endpoint search	|	A faire
 

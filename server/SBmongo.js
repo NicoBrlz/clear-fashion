@@ -50,13 +50,17 @@ async function insertion(){
 }
 
 
-async function fliterProducts(brandFilter = null, less = null, price = false, date = false, weeks = false){
+async function fliterProducts(id = null, brandFilter = null, less = null, price = false, date = false, weeks = false){
     const db = await connection();
 
     var query = {} //this will help mixing the filters
     var result;
 
     //filters
+    //we add an id filter for later
+    if(id!=null){
+        query._id = id;
+    }
     if(brandFilter != null){
         query.brand = brandFilter;
     }
@@ -82,11 +86,13 @@ async function fliterProducts(brandFilter = null, less = null, price = false, da
 
     result = await result.toArray();
 
+    
     console.log('resultat 1', result);
     console.log('Number of products: ', result.length);
 
     await client.close();
     console.log('Database disconnected');
+    return result;
 }
 
 
