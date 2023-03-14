@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const { v4: uuidv4 } = require('uuid'); //will generate a random id
 
 /**
  * Parse webpage e-shop
@@ -10,6 +11,7 @@ const parse = data => {
   const $ = cheerio.load(data);
   return $('.grid__item .card__content')
     .map((i, element) => {
+      const _id = uuidv4();
       const brand = 'circlesportswear'
       const name = $(element)
         .find('.card__heading')
@@ -27,12 +29,12 @@ const parse = data => {
       var currentdate = new Date(); 
       const date = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
+                + currentdate.getFullYear() + " "  
                 + currentdate.getHours() + ":"  
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 
-      return {brand, name, price, date};
+      return {_id, brand, name, price, date};
     })
     .get();
 };

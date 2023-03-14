@@ -52,8 +52,11 @@ async function insertion(){
 
 async function fliterProducts(brandFilter = null, less = null, price = false, date = false, weeks = false){
     const db = await connection();
-    var query = {}
+
+    var query = {} //this will help mixing the filters
     var result;
+
+    //filters
     if(brandFilter != null){
         query.brand = brandFilter;
     }
@@ -61,14 +64,20 @@ async function fliterProducts(brandFilter = null, less = null, price = false, da
         query.price = {$lt: less};
     }
 
+    //we apply the filters here
     result = await db.collection('products').find(query);
-    
+    //note that we don't convert it into an array yet, in order to sort it first
 
+    //sorting
     if(price==true){
         result = result.sort({price: 1});
     }
     if(date==true){
         result = result.sort({date: 1});
+    }
+
+    if(weeks==true){
+        //do something
     }
 
     result = await result.toArray();
@@ -80,7 +89,14 @@ async function fliterProducts(brandFilter = null, less = null, price = false, da
     console.log('Database disconnected');
 }
 
-fliterProducts(brandFilter = 'dedicated', less = 100.0, date = true);
+
+//insertion();
+//fliterProducts(brandFilter = 'dedicated', less = 100.0, date = true);
+
+module.exports = {
+    insertion,
+    fliterProducts
+}
 
 
 
