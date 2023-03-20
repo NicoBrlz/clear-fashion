@@ -37,15 +37,37 @@ async function insertion(){
     const db = await connection();
     //reading json file
     const data = JSON.parse(fs.readFileSync(file));
-    console.log(data);
+    //console.log(data);
+
+    //products we already have
+    const prod = await db.collection('products').find({}).toArray();
+    let res = [];
+    let check = false;
+
+    //check if the name is already in our collection (can't work with _id bc it changes whenever we scrape products, so if we scrape the same twice, it will have a different id)
+    for(let elem of data) {
+        if(!prod.some(item => item.name == elem.name)) {
+            res.push(elem);
+            check = true;
+        }
+    }
+
+    if(check==false) {
+        client.close();
+        console.log('No new products');
+        console.log('Database disconnected');
+        process.exit(0);
+    }
 
     //insert the data in products collection
+    const result = await db.collection('products').insertMany(res);
+
     //console.log(await data);
-    const result = await db.collection('products').insertMany(data, {upsert: true});
+    
 
     console.log(`${result.insertedCount} documents insérés avec succès`);
 
-    await db.collection('products').find();
+    //console.log('ICI4',await db.collection('products').find());
 
     client.close();
     console.log('Database disconnected');
@@ -98,8 +120,8 @@ async function fliterProducts(id = null, brandFilter = null, less = null, price 
 }
 
 
-//insertion();
-console.log(fliterProducts());
+insertion();
+//console.log(fliterProducts());
 
 module.exports = {
     insertion,
