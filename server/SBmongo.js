@@ -45,6 +45,8 @@ async function insertion(){
 
     console.log(`${result.insertedCount} documents insérés avec succès`);
 
+    await db.collection('products').find();
+
     client.close();
     console.log('Database disconnected');
 }
@@ -97,7 +99,7 @@ async function fliterProducts(id = null, brandFilter = null, less = null, price 
 
 
 //insertion();
-//fliterProducts(brandFilter = 'dedicated', less = 100.0, date = true);
+console.log(fliterProducts());
 
 module.exports = {
     insertion,

@@ -13,7 +13,13 @@ const parse = data => {
   return $('.products-list__block')
     .map((i, element) => {
       const _id = uuidv4();
+
+      const link = $(element)
+        .find('.product-miniature__thumb-link')
+        .attr('href');
+
       const brand = 'montlimart';
+
       const name = $(element)
         .find('.product-miniature__title .text-reset')
         .text()
@@ -34,7 +40,7 @@ const parse = data => {
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 
-      return {_id, brand, name, price, date};
+      return {_id, link, brand, name, price, date};
     })
     .get();
 };

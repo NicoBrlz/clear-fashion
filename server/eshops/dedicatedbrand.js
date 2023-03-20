@@ -13,12 +13,20 @@ const parse = data => {
   return $('.productList-container .productList')
     .map((i, element) => {
       const _id = uuidv4();
+
+      const link = "https://www.dedicatedbrand.com"
+        .concat($(element)
+        .find('.productList-link')
+        .attr('href'));
+
       const brand = 'dedicated';
+
       const name = $(element)
         .find('.productList-title')
         .text()
         .trim()
         .replace(/\s/g, ' ');
+
       const price = parseInt(
         $(element)
           .find('.productList-price')
@@ -32,7 +40,7 @@ const parse = data => {
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 
-      return {_id, brand, name, price, date};
+      return {_id, link, brand, name, price, date};
     })
     .get();
 };

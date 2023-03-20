@@ -59,6 +59,28 @@ idLast.setAttribute('id', 'last');
 const spanLast = document.querySelector('#last');
 
 
+//Creation of a Fav filter button
+const parentSection = document.getElementById("options");
+
+const newDiv= document.createElement("div");
+newDiv.setAttribute("favs", "Favorites");
+parentSection.appendChild(newDiv);
+
+const label = document.createElement('label');
+label.textContent = 'Filter by favorites : ';
+
+const button3 = document.createElement('button')
+button3.textContent = 'By fav';
+button3.setAttribute('name', 'favs');
+button3.setAttribute('id', 'byFav');
+button3.style.marginLeft = "10px";
+
+newDiv.appendChild(label);
+newDiv.appendChild(button3);
+
+const byFav = document.querySelector('#byFav');
+
+
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -140,6 +162,7 @@ const renderProducts = products => {
         <span>${product.brand}</span>
         <a href="${product.link}">${product.name}</a>
         <span>${product.price}€</span>
+        <button type="button" name="fav" id=${product.uuid} onclick="EditFav(this.id)" style="margin left: 10px;"> fav </button> 
       </div>
     `;
     })
@@ -200,6 +223,31 @@ const renderIndicators = (pagination, products, brands) => {
   //console.log("count", count);
   spanNbProducts.innerHTML = count;
   spanNbBrands.innerHTML = brands.length;
+  let l = 0;
+  /*
+  
+  */
+  
+  products.then((prod) => {
+    for(const elem of prod.result) {
+      const weeks = 1000*3600*24*14*16;
+      console.log(new Date(elem.released).getTime(), weeks)
+      if(Math.abs(new Date(elem.released).getTime() - new Date().getTime() < weeks)){
+        console.log('date', elem.released)
+        console.log('VERIFIED')
+        l = l + 1;
+      }
+        
+    }
+    console.log('NEWS', l); 
+    spanNbNew.innerHTML = l;
+  });
+  
+  
+  
+  
+  
+
   
   /*
   let nbNew = 0;
@@ -219,16 +267,38 @@ const render = (products, pagination) => {
   renderPagination(pagination);
   //renderIndicators(pagination);
   fetchBrands().then(brands => {
-    renderIndicators(pagination, fetchProducts("","",""), brands);
+    renderIndicators(pagination, fetchProducts(), brands);
   });
   
 
 };
 
+//Funtions fav
 
+const EditFav = async id => {
+  const val = await allStorage();
+  let fav = [];
+  fav.push(currentProducts.find(item => item.uuid == id));
+  if(val.some(item => item.uuid === id)) {
+    localStorage.removeItem(fav[0].name, JSON.stringify(fav[0]));
+  }
+  else {
+    localStorage.setItem(fav[0].name, JSON.stringify(fav[0]));
+  }
+  
+}
 
-
-
+//Helps to check if our local storage already contains a value
+async function allStorage() {
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+    while ( i-- ) {
+        values.push(JSON.parse(localStorage.getItem(keys[i])));
+    }
+    console.log('local', values);
+    return values;
+}
 
 
 /**
@@ -269,14 +339,13 @@ buttonReleased.addEventListener('click', async () => {
   for (let i=0; i<products.result.length; i++) {
     //on test ajd-released (ou released-ajd) après avoir convertit released en date ou les 2 en une même unité
     //puis on ajoute le produit à filtered
-    const weeks = 1000*3600*24*14
-    if(Math.abs(new Date() - new Date(products.result[i].released)) < weeks) {
-      console.log('test result', products.result[i])
+    const weeks = 1000*3600*24*14;
+    if(Math.abs(new Date(products.result[i].released).getTime() - new Date().getTime()) < weeks) {
+      console.log('test result', products.result[i]);
       filtered.result.push(products.result[i]);
     }
   }
   filtered.meta.push(products.meta)
-  console.log("date", filtered);
   setCurrentProducts(filtered);
   render(currentProducts, currentPagination);
 
@@ -292,8 +361,21 @@ buttonPrice.addEventListener('click', async () => {
     }
   }
   filtered.meta.push(products.meta)
-  console.log("date", filtered);
   setCurrentProducts(filtered);
+  console.log('FILTERED fzfz', filtered)
+  render(currentProducts, currentPagination);
+
+});
+
+//Not an event listener, to change a bit
+byFav.addEventListener('click', async() => {
+  let filtered = {"result": [], "meta": []};
+  //const products = await fetchProducts(selectPage.value, selectShow.value, selectBrand.value);
+  console.log('AQUI NIÑO', allStorage());
+  filtered.result = await allStorage();
+  filtered.meta.push(products.meta)
+  setCurrentProducts(filtered);
+  console.log('FILTERED', filtered)
   render(currentProducts, currentPagination);
 
 });
@@ -325,12 +407,16 @@ selectSort.addEventListener('change', async (event) => {
 })
 
 
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 });
+
+
 
 
 //Feature 1 : On ajoute un eventListener au selector selectPage 
@@ -347,7 +433,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 //Feature 3 - 4
-//3 -> problèmes
+//3 -> devrait être bon
 //4 -> done mais checker les qlq pb sur le bloc notes
 
 
@@ -360,5 +446,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 //done
 
 
+//Feature 9 : Nb of new prods
+//still some issues to fix : parameters when calling fetchProd in the render method? Dates?
 
-//Feature 9
+//Feature 10 : p50,p90 and p95
+
+//Feature 12 : Open prod link
+//on peut déjà cliquer sur le nom du produit
+
+//Feature 13 : Save as fav
+//can save if we click once and remove if twice
+//using local storage
+
+//Feature 14 : Filter by fav
+//create a button in the 1st section & add an event listener that sets the currentProducts on the fav list

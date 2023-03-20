@@ -12,7 +12,14 @@ const parse = data => {
   return $('.grid__item .card__content')
     .map((i, element) => {
       const _id = uuidv4();
+
+      const link = "https://shop.circlesportswear.com/"
+        .concat($(element)
+        .find('.full-unstyled-link')
+        .attr('href'))
+
       const brand = 'circlesportswear'
+
       const name = $(element)
         .find('.card__heading')
         .text()
@@ -34,7 +41,7 @@ const parse = data => {
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 
-      return {_id, brand, name, price, date};
+      return {_id, link, brand, name, price, date};
     })
     .get();
 };

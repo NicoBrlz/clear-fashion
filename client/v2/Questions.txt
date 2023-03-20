@@ -3,6 +3,10 @@ et pas : https://clear-fashion-api.vercel.app/?released=2022-09-24
 
 je peux pas non plus le faire avec price   |   pas besoin
 
+=> car il n'y a pas d'endpoint pour ces fonctionalités
+
+
+
 filtrer directement dans les event listener  |   fait
 
 
@@ -15,7 +19,7 @@ Uncaught (in promise) TypeError: Cannot destructure property 'currentPage' of 'p
 Problème avec Pagination -> pb dans meta?	 |	réglé (il fallait que notre argument de setCurrentProducts contienne aussi meta)
 
 
-sur la bonne voie pour buttonReleased mais l'array filtered.result reste vide	  |	A checker
+sur la bonne voie pour buttonReleased mais l'array filtered.result reste vide	  |	Fait
 
 
 on peut pas cumuler les filtres/sort	|	A checker
@@ -23,8 +27,14 @@ on peut pas cumuler les filtres/sort	|	A checker
 
 number of products devient undefined quand on appuie sur un bouton	|	A checker
 
+
 compter les nbNew 	|	A faire
+	=> Régler le problème des dates dans le if
+	=> Faire en sorte qu'on puisse afficher le nb de nouveaux produits pour la marque sélectionnée
 
 p50, p90 et p95??		| 	A checker
+
+Add fav	|	Fait (1 click = fav, 2 clicks = unfav)
+
 
 

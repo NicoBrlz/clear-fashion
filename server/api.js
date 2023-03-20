@@ -30,17 +30,19 @@ app.get('/products/:id', async (request, response) => {
 //other filters
 app.get('/products/search', async (request, response) => {
   try {
-    const limit = parseInt(request.query.limit);
-    const brand = request.query.brand;
-    const price = parseFloat(request.query.price);
-    const products = await Mongo.filterProducts(null, brand, price, true);
-    const results = products.slice(0, limit);
-    response.send(results);
-  } catch (error) {
+    const limito = parseInt(request.query.limit);
+    const brando = request.query.brand;
+    const priceo = parseFloat(request.query.price);
+    const productso = await Mongo.filterProducts();
+    const results = productso.slice(0, limito);
+    response.send(productso);
+  } 
+  catch (error) {
     console.error(error);
     response.status(500).json({error: 'Internal server error'});
   }
 });
+
 
 
 

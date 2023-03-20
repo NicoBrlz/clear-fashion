@@ -56,7 +56,7 @@ const [,, eshop] = process.argv;
 async function to_json(dict) {
   const jsonString = JSON.stringify(dict);
   const fs = require('fs');
-  fs.writeFile('products.json', jsonString, (err) => {
+  fs.writeFile('./products.json', jsonString, (err) => {
     if (err) {
       console.error(err);
       return;
