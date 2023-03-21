@@ -68,8 +68,8 @@ async function insertion(){
         console.log(`${result.insertedCount} documents insérés avec succès`);
 
         //console.log('ICI4',await db.collection('products').find());
-        client.close();
-        console.log('Database disconnected');
+        //client.close();
+        //console.log('Database disconnected');
 
     }
 
@@ -125,8 +125,8 @@ async function filterProducts(id = null, brandFilter = null, less = null, price 
     //console.log('resultat 1', result);
     console.log('Number of products: ', result.length);
 
-    await client.close();
-    console.log('Database disconnected');
+    //await client.close();
+    //console.log('Database disconnected');
     return result;
 }
 
