@@ -55,7 +55,7 @@ app.get('/products/search', async (request, response) => {
 
   data.result = results;
   meta.currentPage=page;
-  meta.pageCount = products.length/size;
+  meta.pageCount = Int(products.length/size);
   meta.pageSize = size;
   meta.count = products.length;
 
