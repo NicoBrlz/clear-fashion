@@ -33,14 +33,14 @@ const parse = data => {
           .text()
       );
       var currentdate = new Date(); 
-      const date = currentdate.getDate() + "/"
+      const released = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
                 + currentdate.getFullYear() + " "  
                 + currentdate.getHours() + ":"  
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 
-      return {_id, link, brand, name, price, date};
+      return {_id, link, brand, name, price, released};
     })
     .get();
 };
