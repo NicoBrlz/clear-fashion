@@ -26,11 +26,12 @@ app.get('/', async (request, response) => {
   const results = await Mongo.filterProducts();
 
   data.result = results;
-  data.meta.currentPage = 1;
-  data.meta.pageCount = 1;
-  data.meta.pageSize = results.length;
-  data.meta.count = results.length;
+  meta.currentPage = 1;
+  meta.pageCount = 1;
+  meta.pageSize = results.length;
+  meta.count = results.length;
 
+  data.meta = meta;
   ans.data = data;
   response.send(ans);
 });
@@ -54,7 +55,7 @@ app.get('/products/search', async (request, response) => {
   console.log('price', price);
 
   data.result = results;
-  meta.currentPage=page;
+  meta.currentPage = page;
   meta.pageCount = products.length/size;
   meta.pageSize = size;
   meta.count = products.length;
@@ -68,7 +69,7 @@ app.get('/products/search', async (request, response) => {
 
 app.get('/brands', async (request, response) => {
   const brands = await Mongo.brandsList();
-  data.result = brands;
+  data.result = brands; 
   ans.data = data;
 
   response.send(ans);
