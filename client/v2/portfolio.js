@@ -228,40 +228,10 @@ const renderIndicators = (pagination, products, brands) => {
   //console.log("count", count);
   spanNbProducts.innerHTML = count;
   spanNbBrands.innerHTML = brands.length;
-  let l = 0;
-  /*
-  
-  */
-  
-  products.then((prod) => {
-    for(const elem of prod.result) {
-      const weeks = 1000*3600*24*14*16;
-      console.log(new Date(elem.released).getTime(), weeks)
-      if(Math.abs(new Date(elem.released).getTime() - new Date().getTime() < weeks)){
-        console.log('date', elem.released)
-        console.log('VERIFIED')
-        l = l + 1;
-      }
-        
-    }
-    console.log('NEWS', l); 
-    spanNbNew.innerHTML = l;
-  });
   
   
   
   
-  
-
-  
-  /*
-  let nbNew = 0;
-  for(let i = 0; i<222; i++){
-    if(Math.abs(new Date() - new Date(products.result[i].released)) < 1000*3600*24*7){
-      nbNew++;
-    }
-  }
-  */
 
 };
 
