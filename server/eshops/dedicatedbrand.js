@@ -32,13 +32,24 @@ const parse = data => {
           .find('.productList-price')
           .text()
       );
-      var currentdate = new Date(); 
-      const released = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+      if (isNaN(price)) {
+        return null; 
+      }
+
+      function randomDate(start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+      }
+      const startDate = new Date(2022, 0, 1);
+      const endDate = new Date();
+                 
+      const released_d = randomDate(startDate, endDate);
+       
+      const released = released_d.getDate() + "/"
+                + (released_d.getMonth()+1)  + "/" 
+                + released_d.getFullYear() + " "  
+                + released_d.getHours() + ":"  
+                + released_d.getMinutes() + ":" 
+                + released_d.getSeconds();
 
       return {_id, link, brand, name, price, released};
     })

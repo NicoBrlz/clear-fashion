@@ -340,16 +340,17 @@ selectBrand.addEventListener('change', async (event) => {
 buttonReleased.addEventListener('click', async () => {
   let filtered = {"result": [], "meta": []};
   const products = await fetchProducts(selectPage.value, selectShow.value, selectBrand.value);
+  
+  const today = new Date();
+  const weeks = new Date(today);
+  weeks.setDate(today.getDate() - 14);
 
-  for (let i=0; i<products.result.length; i++) {
-    //on test ajd-released (ou released-ajd) après avoir convertit released en date ou les 2 en une même unité
-    //puis on ajoute le produit à filtered
-    const weeks = 1000*3600*24*14;
-    if(Math.abs(new Date(products.result[i].released).getTime() - new Date().getTime()) < weeks) {
-      console.log('test result', products.result[i]);
+  products.result.forEach(item => {
+    const itemDate = new Date(item.date);
+    if(itemDate >= twoWeeksAgo && itemDate <= today) {
       filtered.result.push(products.result[i]);
     }
-  }
+  });
   filtered.meta.push(products.meta)
   setCurrentProducts(filtered);
   render(currentProducts, currentPagination);
