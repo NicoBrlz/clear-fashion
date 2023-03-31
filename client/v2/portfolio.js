@@ -10,6 +10,11 @@ This endpoint accepts the following optional query string parameters:
 - `size` - number of products to return
 GET https://clear-fashion-api.vercel.app/brands
 Search for available brands list
+
+
+
+NOW USING : https://clear-fashion-ivory.vercel.app/
+AND https://clear-fashion-ivory.vercel.app/brands
 */
 
 // current products on the page
@@ -101,7 +106,7 @@ const setCurrentProducts = ({result, meta}) => {
 const fetchProducts = async (page = 1, size = 12, brand = null) => {
   try {
     const response = await fetch(
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}&brand=${brand}`
+      `https://clear-fashion-ivory.vercel.app/products/search?page=${page}&size=${size}&brand=${brand}`
     );
     const body = await response.json();
 
@@ -130,7 +135,7 @@ fetchProducts().then(res => {
 const fetchBrands = async () => {
   try {
     const response = await fetch(
-      `https://clear-fashion-api.vercel.app/brands`
+      `https://clear-fashion-ivory.vercel.app/brands`
     );
     const body = await response.json();
     if (body.success !== true) {
@@ -158,11 +163,11 @@ const renderProducts = products => {
   const template = products
     .map(product => {
       return `
-      <div class="product" id=${product.uuid}>
+      <div class="product" id=${product._id}>
         <span>${product.brand}</span>
         <a href="${product.link}">${product.name}</a>
         <span>${product.price}€</span>
-        <button type="button" name="fav" id=${product.uuid} onclick="EditFav(this.id)" style="margin left: 10px;"> fav </button> 
+        <button type="button" name="fav" id=${product._id} onclick="EditFav(this.id)" style="margin left: 10px;"> fav </button> 
       </div>
     `;
     })
@@ -278,8 +283,8 @@ const render = (products, pagination) => {
 const EditFav = async id => {
   const val = await allStorage();
   let fav = [];
-  fav.push(currentProducts.find(item => item.uuid == id));
-  if(val.some(item => item.uuid === id)) {
+  fav.push(currentProducts.find(item => item._id == id));
+  if(val.some(item => item._id === id)) {
     localStorage.removeItem(fav[0].name, JSON.stringify(fav[0]));
   }
   else {
